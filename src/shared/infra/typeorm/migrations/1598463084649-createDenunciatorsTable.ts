@@ -1,15 +1,16 @@
 import { MigrationInterface, Table, QueryRunner } from 'typeorm';
 
-export default class createDenunciatorTable1598463084649
+export default class createDenunciatorsTable1598463084649
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'denuciators',
+        name: 'denunciators',
         columns: [
           {
             name: 'id',
-            type: 'integer',
+            type: 'int',
+            isPrimary: true,
           },
           {
             name: 'name',
@@ -25,6 +26,6 @@ export default class createDenunciatorTable1598463084649
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('denuciators');
+    await queryRunner.dropTable('denunciators');
   }
 }

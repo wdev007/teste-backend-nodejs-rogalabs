@@ -1,12 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-class Denunciation {
+class Denunciator {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  name: string;
+
+  @Column()
+  cpf: string;
 }
 
-export default Denunciation;
+export default Denunciator;
