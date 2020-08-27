@@ -7,6 +7,12 @@ class Denunciation {
 
   @Column()
   title: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  denunciator_id: number;
 }
 
 export default Denunciation;

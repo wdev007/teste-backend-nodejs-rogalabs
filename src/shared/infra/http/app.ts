@@ -3,6 +3,8 @@ import 'dotenv/config';
 import express, { Application } from 'express';
 
 import routes from './routes';
+import '@shared/infra/typeorm';
+import '@shared/containers';
 
 class App {
   public server: Application;
