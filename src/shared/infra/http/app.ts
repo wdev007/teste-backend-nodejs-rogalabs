@@ -6,6 +6,8 @@ import routes from './routes';
 import '@shared/infra/typeorm';
 import '@shared/containers';
 
+import Logger from './middlewares/Logger';
+
 class App {
   public server: Application;
 
@@ -17,6 +19,7 @@ class App {
 
   middlewares(): void {
     this.server.use(express.json());
+    this.server.use(Logger);
   }
 
   routes(): void {

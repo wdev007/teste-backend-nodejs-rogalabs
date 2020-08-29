@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 import IDenunciationsRepository from '../repositories/IDenunciationsRepository';
+import Denunciation from '../infra/typeorm/entities/Denunciation';
 
 interface IRequest {
   latitude: string;
@@ -22,7 +23,10 @@ class CreateDenunciationsService {
     private denunciationsRepository: IDenunciationsRepository
   ) {}
 
-  public async execute({ denunciante, denuncia }: IRequest): Promise<void> {
+  public async execute({
+    denunciante,
+    denuncia,
+  }: IRequest): Promise<Denunciation> {
     let denunciator = await this.denunciationsRepository.findDenunciatorByCpf(
       denunciante.cpf
     );
@@ -34,11 +38,15 @@ class CreateDenunciationsService {
       );
     }
 
-    this.denunciationsRepository.createDenunciation({
-      title: denuncia.title,
-      description: denuncia.descricao,
-      denunciator_id: denunciator.id,
-    });
+    const denunciations = await this.denunciationsRepository.createDenunciation(
+      {
+        title: denuncia.title,
+        description: denuncia.descricao,
+        denunciator_id: denunciator.id,
+      }
+    );
+
+    return denunciations;
   }
 }
 
